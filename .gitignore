@@ -1,0 +1,6 @@
+.idea/
+vendor/
+local.env
+.vagrant
+composer.phar
+*.pem
