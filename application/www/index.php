@@ -15,7 +15,6 @@ $results = '<no results yet>';
 if(isset($_POST['assertionXML'])) {    
     $xmlDataKey = '<xenc:EncryptedData';
     $xmlDataEnd = '</xenc:EncryptedData>';
-    // $xmlDataKey = 'saml:EncryptedAssertion';
     
     $privateKey = __DIR__ . '/../saml.pem';
     
