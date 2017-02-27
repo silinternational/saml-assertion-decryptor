@@ -49,8 +49,11 @@ if(isset($_POST['assertionXML'])) {
     $decryptKey->loadKey($privateKey, true, false);    
     $decryptedAssertion = \SAML2_Utils::decryptElement($data, $decryptKey);  
     
+    // Make the xml string output nicely formatted
+    $decryptedAssertion->ownerDocument->formatOutput = TRUE;
+    
     // Convert output to a string.
-    $results = $decryptedAssertion->ownerDocument->saveXML($decryptedAssertion);
+    $results = $decryptedAssertion->ownerDocument->saveXML($decryptedAssertion);    
 }
 
 ?>
@@ -58,8 +61,8 @@ if(isset($_POST['assertionXML'])) {
 <html>
 
  <body style="background-color: #FEB">
-  <h1> Decrypt a SAML Assertion</h1>
-
+  <h1 style="margin-bottom: 10px;"> Decrypt a SAML Assertion</h1>
+  <a href="https://github.com/silinternational/saml-assertion-decryptor/blob/master/README.md"  target="_blank">See instructions</a>
   <form action="." method="POST">
     Insert the encrypted SAML assertion:   (Must include a &lt;xenc:EncryptedData&gt; tag)
     <br>
