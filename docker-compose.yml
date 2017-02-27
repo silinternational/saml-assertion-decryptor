@@ -1,0 +1,9 @@
+version: "2"
+services:
+  web:
+    build: .
+    volumes:
+      - ./application/www/:/data/www/
+    command: /data/run.sh 
+    ports:
+      - "80:80"
