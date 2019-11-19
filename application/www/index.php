@@ -5,9 +5,8 @@ ini_set('display_errors', '1');
 include "/data/vendor/autoload.php";
 
 // include __DIR__ . '/../vendor/simplesamlphp/saml2/src/SAML2/Utils.php';
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-use XMLSecurityKey;
-//use SAML2\Utils;
 use SAML2_Utils;
 
 $results = '<no results yet>';
@@ -15,7 +14,6 @@ $results = '<no results yet>';
 if(isset($_POST['assertionXML'])) {    
     $xmlDataKey = '<xenc:EncryptedData';
     $xmlDataEnd = '</xenc:EncryptedData>';
-    // $xmlDataKey = 'saml:EncryptedAssertion';
     
     $privateKey = __DIR__ . '/../saml.pem';
     
