@@ -5,9 +5,8 @@ ini_set('display_errors', '1');
 include "/data/vendor/autoload.php";
 
 // include __DIR__ . '/../vendor/simplesamlphp/saml2/src/SAML2/Utils.php';
+use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-use XMLSecurityKey;
-//use SAML2\Utils;
 use SAML2_Utils;
 
 $results = '<no results yet>';
