@@ -1,5 +1,5 @@
 {
-  "name": "saml-assertion-decryptor",
+  "name": "silinternational/saml-assertion-decryptor",
   "description": "Php decryptor for saml assertions",
   "type": "library",
   "license": "MIT",
