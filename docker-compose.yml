@@ -4,6 +4,10 @@ services:
     build: .
     volumes:
       - ./application/www/:/data/www/
+      - ./application/saml.pem:/data/saml.pem
+      - ./composer.json:/data/composer.json
+      - ./composer.lock:/data/composer.lock
+      - ./vendor/:/data/vendor/
     command: /data/run.sh 
     ports:
       - "80:80"
