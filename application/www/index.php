@@ -7,7 +7,7 @@ include "/data/vendor/autoload.php";
 // include __DIR__ . '/../vendor/simplesamlphp/saml2/src/SAML2/Utils.php';
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 
-use SAML2_Utils;
+use SAML2\Utils;
 
 $results = '<no results yet>';
 
@@ -35,7 +35,7 @@ if(isset($_POST['assertionXML'])) {
     
     $domAssertion = $dom->documentElement;
     
-    $data = \SAML2_Utils::xpQuery($domAssertion, './xenc:EncryptedData')[0];
+    $data = Utils::xpQuery($domAssertion, './xenc:EncryptedData')[0];
     // header('Content-Type: text/plain');
     // die("AAA " . var_export($data->ownerDocument->saveXML($data), true));
     
@@ -45,7 +45,7 @@ if(isset($_POST['assertionXML'])) {
     );    
     
     $decryptKey->loadKey($privateKey, true, false);    
-    $decryptedAssertion = \SAML2_Utils::decryptElement($data, $decryptKey);  
+    $decryptedAssertion = Utils::decryptElement($data, $decryptKey);  
     
     // Make the xml string output nicely formatted
     $decryptedAssertion->ownerDocument->formatOutput = TRUE;
