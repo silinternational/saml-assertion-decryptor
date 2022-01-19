@@ -1,13 +1,14 @@
-FROM silintl/php7:latest
+FROM silintl/php7:7.4
 
 MAINTAINER Phillip Shipley <phillip.shipley@gmail.com>
 
-ENV REFRESHED_AT 2016-12-16
+ENV REFRESHED_AT 2022-01-19
 
-RUN apt-get update -y && \
-    apt-get install -y vim && \
-    apt-get install -y php-memcache && \
-    apt-get clean
+RUN apt-get update -y \
+ && apt-get install -y \
+      vim \
+      php-memcache \
+ && apt-get clean
 
 # Create required directories
 RUN mkdir -p /data
