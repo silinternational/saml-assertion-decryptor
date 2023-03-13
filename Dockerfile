@@ -1,7 +1,5 @@
 FROM silintl/php8:8.1
 
-MAINTAINER Phillip Shipley <phillip.shipley@gmail.com>
-
 ENV REFRESHED_AT 2022-01-19
 
 RUN apt-get update -y \
