@@ -11,47 +11,58 @@ use SAML2\Utils;
 
 $results = '<no results yet>';
 
-if(isset($_POST['assertionXML'])) {    
-    $xmlDataKey = '<xenc:EncryptedData';
-    $xmlDataEnd = '</xenc:EncryptedData>';
-    
-    $privateKey = __DIR__ . '/../saml.pem';
-    
-    $assertionXML = $_POST['assertionXML'];
-    
-    /*
-     * SAML2 wants the Encrypted Data to appear as a child of the outer xml element.
-     * So, extract it from the input and wrap it in a <list> element.
-     */
-    $startPos = strpos($assertionXML, $xmlDataKey);
-    $endPos = strpos($assertionXML, $xmlDataEnd);
-    $length = $endPos - $startPos + strlen($xmlDataEnd);
-    
-    $encryptedData = substr($assertionXML, $startPos, $length);
-    $newXML = '<list>' . $encryptedData . '</list>';
-        
-    $dom = new DOMDocument();
-    $dom->loadXML($newXML);  
-    
-    $domAssertion = $dom->documentElement;
-    
-    $data = Utils::xpQuery($domAssertion, './xenc:EncryptedData')[0];
-    // header('Content-Type: text/plain');
-    // die("AAA " . var_export($data->ownerDocument->saveXML($data), true));
-    
-    $decryptKey = new XMLSecurityKey(
-        XMLSecurityKey::RSA_OAEP_MGF1P,
-        ['type' => 'private']
-    );    
-    
-    $decryptKey->loadKey($privateKey, true, false);    
-    $decryptedAssertion = Utils::decryptElement($data, $decryptKey);  
-    
-    // Make the xml string output nicely formatted
-    $decryptedAssertion->ownerDocument->formatOutput = TRUE;
-    
-    // Convert output to a string.
-    $results = $decryptedAssertion->ownerDocument->saveXML($decryptedAssertion);    
+if(isset($_POST['assertionXML'])) {
+    try {
+        $xmlDataKey = '<xenc:EncryptedData';
+        $xmlDataEnd = '</xenc:EncryptedData>';
+
+        $privateKey = __DIR__ . '/../saml.pem';
+
+        $assertionXML = $_POST['assertionXML'];
+
+        /*
+         * SAML2 wants the Encrypted Data to appear as a child of the outer xml element.
+         * So, extract it from the input and wrap it in a <list> element.
+         */
+        $startPos = strpos($assertionXML, $xmlDataKey);
+        $endPos = strpos($assertionXML, $xmlDataEnd);
+        $length = $endPos - $startPos + strlen($xmlDataEnd);
+
+        $encryptedData = substr($assertionXML, $startPos, $length);
+        $newXML = '<list>' . $encryptedData . '</list>';
+
+        $dom = new DOMDocument();
+        $dom->loadXML($newXML);
+
+        $domAssertion = $dom->documentElement;
+
+        $data = Utils::xpQuery($domAssertion, './xenc:EncryptedData')[0];
+        // header('Content-Type: text/plain');
+        // die("AAA " . var_export($data->ownerDocument->saveXML($data), true));
+
+        $decryptKey = new XMLSecurityKey(
+            XMLSecurityKey::RSA_OAEP_MGF1P,
+            ['type' => 'private']
+        );
+
+        $decryptKey->loadKey($privateKey, true, false);
+        $decryptedAssertion = Utils::decryptElement($data, $decryptKey);
+
+        // Make the xml string output nicely formatted
+        $decryptedAssertion->ownerDocument->formatOutput = TRUE;
+
+        // Convert output to a string.
+        $results = $decryptedAssertion->ownerDocument->saveXML($decryptedAssertion);
+    } catch (Throwable $throwable) {
+        ?>
+        <html>
+            <body>
+                <pre><?= $throwable ?></pre>
+            </body>
+        </html>
+        <?php
+        exit(1);
+    }
 }
 
 ?>
