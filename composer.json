@@ -11,20 +11,20 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "php": ">=7.4",
-    "gettext/gettext": "^4.8@dev",
+    "php": ">=8.1",
     "roave/security-advisories": "dev-master",
     "ext-dom": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^7.1.0 || ^8.4.0",
-    "simplesamlphp/simplesamlphp": "~1.19.6",
+    "simplesamlphp/simplesamlphp": "~2",
     "simplesamlphp/saml2": "^4.5",
     "robrichards/xmlseclibs": "~3.1.0"
   },
   "config": {
     "allow-plugins": {
-      "simplesamlphp/composer-module-installer": true
+      "simplesamlphp/composer-module-installer": true,
+      "simplesamlphp/composer-xmlprovider-installer": true
     }
   }
 }
