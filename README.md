@@ -5,7 +5,7 @@
 
 It uses the SAML2 php library along with its dependencies.
 
-* `> docker-compose up -d`
+* `> docker compose up -d`
 * copy private key named "saml.pem" into ./application/
 * Browse to your local host
 * Copy and paste saml assertion into the textarea and click on Submit
