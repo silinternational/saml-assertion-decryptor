@@ -83,7 +83,7 @@ if(isset($_POST['assertionXML'])) {
   <?php
     if ($results) {
       echo '<h4>Results</h4>';
-      echo '<textarea name="results" rows="20" cols="100">' . $results . '</textarea>';
+      echo '<textarea name="results" rows="20" cols="100" readonly>' . $results . '</textarea>';
     }
   ?>
  </body>
