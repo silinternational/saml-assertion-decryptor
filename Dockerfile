@@ -1,6 +1,6 @@
 FROM silintl/php8:8.1
 
-ENV REFRESHED_AT 2022-01-19
+ENV REFRESHED_AT=2022-01-19
 
 RUN apt-get update -y \
  && apt-get install -y \
@@ -25,7 +25,7 @@ RUN composer self-update --no-interaction
 RUN composer install --prefer-dist --no-interaction --no-dev --optimize-autoloader --no-scripts
 
 # Copy in SSP override files
-ENV SSP_PATH /data/vendor/simplesamlphp/simplesamlphp
+ENV SSP_PATH=/data/vendor/simplesamlphp/simplesamlphp
 
 RUN chmod a+x /data/run.sh 
 
