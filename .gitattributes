@@ -1,2 +1,2 @@
 *.conf            text   eol=lf
-*.sh              text   eol=lf   diff=bash
+*.sh              text   eol=lf
