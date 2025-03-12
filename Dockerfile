@@ -1,6 +1,6 @@
-FROM silintl/php8:8.1
+FROM silintl/php8:8.3
 
-ENV REFRESHED_AT=2022-01-19
+ENV REFRESHED_AT=2025-03-12
 
 RUN apt-get update -y \
  && apt-get install -y \
